@@ -4,10 +4,11 @@ namespace InventorySystem
 {
     public class InputController : MonoBehaviour
     {
-        
-        public void ShowInventory()
+        [SerializeField] private InventoryController _inventoryController;
+
+        private void Update()
         {
-            
+            if (Input.GetKeyDown(KeyCode.Tab)) _inventoryController.Switch();
         }
     }
 }
