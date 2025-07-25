@@ -8,6 +8,7 @@ namespace InventorySystem
         [FormerlySerializedAs("Canvas")] [SerializeField] public GameObject InventoryOverlay;
 
         public bool IsOpened = true;
+        private bool IsPickupWindowOpen = false;
 
         private void Start()
         {
@@ -32,6 +33,27 @@ namespace InventorySystem
         {
             InventoryOverlay.SetActive(false);
             IsOpened = false;
+        }
+
+
+        public void ShowPickupWindow()
+        {
+            if(IsPickupWindowOpen)
+                return;
+            
+            IsPickupWindowOpen = true;
+            
+            Debug.Log("Pickup Window Show");
+        }
+        
+        public void HidePickupWindow()
+        {
+            if(!IsPickupWindowOpen)
+                return;
+            
+            IsPickupWindowOpen = false;
+            
+            Debug.Log("Pickup Window Hide");
         }
     }
 }
