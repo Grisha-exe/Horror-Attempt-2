@@ -5,14 +5,16 @@ namespace InventorySystem
 {
     public class InventoryController : MonoBehaviour
     {
+        [SerializeField] public GameObject InteractionPanel;
         [FormerlySerializedAs("Canvas")] [SerializeField] public GameObject InventoryOverlay;
 
         public bool IsOpened = true;
-        private bool IsPickupWindowOpen = false;
+        private bool IsPickupWindowOpen = true;
 
         private void Start()
         {
             Hide();
+            HidePickupWindow();
         }
 
         public void Switch()
@@ -43,9 +45,9 @@ namespace InventorySystem
             
             IsPickupWindowOpen = true;
             
-            Debug.Log("Pickup Window Show");
+            InteractionPanel.SetActive(true);
         }
-        
+
         public void HidePickupWindow()
         {
             if(!IsPickupWindowOpen)
@@ -53,7 +55,7 @@ namespace InventorySystem
             
             IsPickupWindowOpen = false;
             
-            Debug.Log("Pickup Window Hide");
+            InteractionPanel.SetActive(false);
         }
     }
 }

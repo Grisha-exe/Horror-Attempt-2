@@ -1,6 +1,7 @@
 using InventorySystem;
 using Project.Scripts.Items;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Project.Scripts.InteractionController
 {
@@ -8,6 +9,7 @@ namespace Project.Scripts.InteractionController
     {
         [SerializeField] private float _rayLength = 5f;
         [SerializeField] private InventoryController _inventoryController;
+
 
         private void Update()
         {
@@ -17,7 +19,7 @@ namespace Project.Scripts.InteractionController
             if (Physics.Raycast(ray, out RaycastHit hit, _rayLength))
             {
                 Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.green);
-            
+
                 if (hit.collider.GetComponent<Item>())
                 {
                     _inventoryController.ShowPickupWindow();
