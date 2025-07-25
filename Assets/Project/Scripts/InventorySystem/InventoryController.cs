@@ -1,11 +1,14 @@
-﻿using UnityEngine;
+﻿using Project.Scripts;
+using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace InventorySystem
 {
     public class InventoryController : MonoBehaviour
     {
-        [SerializeField] public GameObject InteractionPanel;
+        [SerializeField] private ItemsDataList _itemDataList;
+        [SerializeField] public InteractionPanel InteractionPanel;
         [FormerlySerializedAs("Canvas")] [SerializeField] public GameObject InventoryOverlay;
 
         public bool IsOpened = true;
@@ -38,14 +41,22 @@ namespace InventorySystem
         }
 
 
-        public void ShowPickupWindow()
+        public void ShowPickupWindow(string index)
         {
             if(IsPickupWindowOpen)
                 return;
             
             IsPickupWindowOpen = true;
             
-            InteractionPanel.SetActive(true);
+            InteractionPanel.gameObject.SetActive(true);
+
+            for (int i = 0; i < _itemDataList.items.Count; i++)
+            {
+                if (_itemDataList.items[i].Index == index)
+                {
+                    InteractionPanel.SetData(_itemDataList.items[i].ItemIcon, _itemDataList.items[i].ItemName);
+                }
+            }
         }
 
         public void HidePickupWindow()
@@ -55,7 +66,15 @@ namespace InventorySystem
             
             IsPickupWindowOpen = false;
             
-            InteractionPanel.SetActive(false);
+            InteractionPanel.gameObject.SetActive(false);
+        }
+
+        public void PickUp()
+        {
+            if (IsPickupWindowOpen)
+            {
+                
+            }
         }
     }
 }

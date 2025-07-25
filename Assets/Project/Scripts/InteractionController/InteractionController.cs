@@ -11,6 +11,7 @@ namespace Project.Scripts.InteractionController
         [SerializeField] private InventoryController _inventoryController;
 
 
+
         private void Update()
         {
             Vector3 screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f);
@@ -20,9 +21,10 @@ namespace Project.Scripts.InteractionController
             {
                 Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.green);
 
-                if (hit.collider.GetComponent<Item>())
+                if (hit.collider.GetComponent<ItemPickUpTrigger>())
                 {
-                    _inventoryController.ShowPickupWindow();
+                    var index = hit.collider.GetComponent<ItemPickUpTrigger>().GetItemIndex();
+                    _inventoryController.ShowPickupWindow(index);
                 }
                 else
                 {
