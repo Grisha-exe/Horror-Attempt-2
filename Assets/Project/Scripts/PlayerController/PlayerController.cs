@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class NewBehaviourScript : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5.0f;
-    
+    public float MoveSpeed = 5.0f;
+    public float SprintMoveSpeed;
+
+    [SerializeField] private float _currentMoveSpeed;
     private CharacterController _controller;
     
     // Start is called before the first frame update
@@ -26,6 +29,16 @@ public class NewBehaviourScript : MonoBehaviour
         
         moveDirection.y -= 9.81f * Time.deltaTime;
         
-        _controller.Move(moveDirection * moveSpeed * Time.deltaTime);
+        _controller.Move(moveDirection * _currentMoveSpeed * Time.deltaTime);
+    }
+
+    public void SprintOn()
+    {
+        _currentMoveSpeed = MoveSpeed + SprintMoveSpeed;
+    }
+
+    public void SprintOff()
+    {
+        _currentMoveSpeed = MoveSpeed;
     }
 }
