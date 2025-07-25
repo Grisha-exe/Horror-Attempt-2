@@ -5,10 +5,12 @@ namespace InventorySystem
     public class InputController : MonoBehaviour
     {
         [SerializeField] private InventoryController _inventoryController;
+        [SerializeField] private TriggerSystem _triggerSystem;
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Tab)) _inventoryController.Switch();
+            
         }
     }
 }
