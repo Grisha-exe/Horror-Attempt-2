@@ -15,6 +15,8 @@ namespace InventorySystem
             if (Input.GetKeyDown(KeyCode.LeftShift)) _playerController.SprintOn();
             
             if (Input.GetKeyUp(KeyCode.LeftShift)) _playerController.SprintOff();
+            
+            if (Input.GetKeyDown(KeyCode.E)) _inventoryController.PickUp();
         }
     }
 }

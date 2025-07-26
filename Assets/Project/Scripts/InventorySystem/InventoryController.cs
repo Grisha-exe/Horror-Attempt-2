@@ -9,7 +9,12 @@ namespace InventorySystem
     {
         [SerializeField] private ItemsDataList _itemDataList;
         [SerializeField] public InteractionPanel InteractionPanel;
-        [FormerlySerializedAs("Canvas")] [SerializeField] public GameObject InventoryOverlay;
+        [SerializeField] private ItemsController _itemsController;
+
+        [FormerlySerializedAs("Canvas")] [SerializeField]
+        public GameObject InventoryOverlay;
+
+        private string _currentItemIndex;
 
         public bool IsOpened = true;
         private bool IsPickupWindowOpen = true;
@@ -43,11 +48,11 @@ namespace InventorySystem
 
         public void ShowPickupWindow(string index)
         {
-            if(IsPickupWindowOpen)
+            if (IsPickupWindowOpen)
                 return;
-            
+
             IsPickupWindowOpen = true;
-            
+
             InteractionPanel.gameObject.SetActive(true);
 
             for (int i = 0; i < _itemDataList.items.Count; i++)
@@ -55,17 +60,18 @@ namespace InventorySystem
                 if (_itemDataList.items[i].Index == index)
                 {
                     InteractionPanel.SetData(_itemDataList.items[i].ItemIcon, _itemDataList.items[i].ItemName);
+                    _currentItemIndex = index;
                 }
             }
         }
 
         public void HidePickupWindow()
         {
-            if(!IsPickupWindowOpen)
+            if (!IsPickupWindowOpen)
                 return;
-            
+
             IsPickupWindowOpen = false;
-            
+
             InteractionPanel.gameObject.SetActive(false);
         }
 
@@ -73,7 +79,10 @@ namespace InventorySystem
         {
             if (IsPickupWindowOpen)
             {
-                
+                var item = _itemDataList.GetItemDataById(_currentItemIndex);
+                _itemsController.DeleteItemFromScene(_currentItemIndex);
+
+
             }
         }
     }
