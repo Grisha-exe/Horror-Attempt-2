@@ -81,6 +81,7 @@ namespace InventorySystem
             {
                 var item = _itemDataList.GetItemDataById(_currentItemIndex);
                 _itemsController.DeleteItemFromScene(_currentItemIndex);
+                _itemsController.AddItemToHands(_currentItemIndex);
 
 
             }
